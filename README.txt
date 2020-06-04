@@ -1,3 +1,10 @@
+# ----- Adafruit-Motor-Shield-library V1 -----
+
+## ----- WHY THIS FORK -----
+Fixing issues with the Arduino Due, to make this work.
+Please use the V2 Shield!
+
+## ----- NOTE -----
 This library is old and deprecated - and the hardware disconinued years ago. V2 of the shield uses i2c only and works with anything that has I2C support (e.g. all arduinos) without endless incompatibilities and porting requirements! :)
 -> https://www.adafruit.com/products/1438
 
