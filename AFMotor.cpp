@@ -29,13 +29,7 @@ AFMotorController::AFMotorController(void) {
 }
 
 void AFMotorController::enable(void) {
-  // setup the latch
-  /*
-  LATCH_DDR |= _BV(LATCH);
-  ENABLE_DDR |= _BV(ENABLE);
-  CLK_DDR |= _BV(CLK);
-  SER_DDR |= _BV(SER);
-  */
+ 
   pinMode(MOTORLATCH, OUTPUT);
   pinMode(MOTORENABLE, OUTPUT);
   pinMode(MOTORDATA, OUTPUT);
@@ -45,7 +39,6 @@ void AFMotorController::enable(void) {
 
   latch_tx();  // "reset"
 
-  //ENABLE_PORT &= ~_BV(ENABLE); // enable the chip outputs!
   digitalWrite(MOTORENABLE, LOW);
 }
 
