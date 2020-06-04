@@ -126,7 +126,7 @@ inline void initPWM1(uint8_t freq) {
         digitalWrite(11, LOW);
     #endif
 #else
-   #error "This chip is not supported!"
+   analogWrite(11,0);
 #endif
     #if !defined(PIC32_USE_PIN9_FOR_M1_PWM) && !defined(PIC32_USE_PIN10_FOR_M1_PWM)
         pinMode(11, OUTPUT);
@@ -163,7 +163,7 @@ inline void setPWM1(uint8_t s) {
         }
     #endif
 #else
-   #error "This chip is not supported!"
+   analogWrite(11,s);
 #endif
 }
 
@@ -195,7 +195,7 @@ inline void initPWM2(uint8_t freq) {
     OC1RS = 0x0000;
     OC1R = 0x0000;
 #else
-   #error "This chip is not supported!"
+   analogWrite(3,0);
 #endif
 
     pinMode(3, OUTPUT);
@@ -216,7 +216,7 @@ inline void setPWM2(uint8_t s) {
     // Set the OC1 (pin3) PMW duty cycle from 0 to 255
     OC1RS = s;
 #else
-   #error "This chip is not supported!"
+   analogWrite(3,s);
 #endif
 }
 
@@ -249,7 +249,7 @@ inline void initPWM3(uint8_t freq) {
     OC3RS = 0x0000;
     OC3R = 0x0000;
 #else
-   #error "This chip is not supported!"
+   analogWrite(6,0);
 #endif
     pinMode(6, OUTPUT);
 }
@@ -269,7 +269,7 @@ inline void setPWM3(uint8_t s) {
     // Set the OC3 (pin 6) PMW duty cycle from 0 to 255
     OC3RS = s;
 #else
-   #error "This chip is not supported!"
+   analogWrite(6,s);
 #endif
 }
 
@@ -304,7 +304,7 @@ inline void initPWM4(uint8_t freq) {
     OC2RS = 0x0000;
     OC2R = 0x0000;
 #else
-   #error "This chip is not supported!"
+   analogWrite(5,0);
 #endif
     pinMode(5, OUTPUT);
 }
@@ -324,7 +324,7 @@ inline void setPWM4(uint8_t s) {
     // Set the OC2 (pin 5) PMW duty cycle from 0 to 255
     OC2RS = s;
 #else
-   #error "This chip is not supported!"
+   analogWrite(5,s);
 #endif
 }
 
@@ -417,8 +417,7 @@ AF_Stepper::AF_Stepper(uint16_t steps, uint8_t num) {
   currentstep = 0;
 
   if (steppernum == 1) {
-    latch_state &= ~_BV(MOTOR1_A) & ~_BV(MOTOR1_B) &
-      ~_BV(MOTOR2_A) & ~_BV(MOTOR2_B); // all motor pins to 0
+    latch_state &= ~_BV(MOTOR1_A) & ~_BV(MOTOR1_B) & ~_BV(MOTOR2_A) & ~_BV(MOTOR2_B); // all motor pins to 0
     MC.latch_tx();
     
     // enable both H bridges
@@ -460,12 +459,10 @@ void AF_Stepper::setSpeed(uint16_t rpm) {
 
 void AF_Stepper::release(void) {
   if (steppernum == 1) {
-    latch_state &= ~_BV(MOTOR1_A) & ~_BV(MOTOR1_B) &
-      ~_BV(MOTOR2_A) & ~_BV(MOTOR2_B); // all motor pins to 0
+    latch_state &= ~_BV(MOTOR1_A) & ~_BV(MOTOR1_B) & ~_BV(MOTOR2_A) & ~_BV(MOTOR2_B); // all motor pins to 0
     MC.latch_tx();
   } else if (steppernum == 2) {
-    latch_state &= ~_BV(MOTOR3_A) & ~_BV(MOTOR3_B) &
-      ~_BV(MOTOR4_A) & ~_BV(MOTOR4_B); // all motor pins to 0
+    latch_state &= ~_BV(MOTOR3_A) & ~_BV(MOTOR3_B) & ~_BV(MOTOR4_A) & ~_BV(MOTOR4_B); // all motor pins to 0
     MC.latch_tx();
   }
 }
