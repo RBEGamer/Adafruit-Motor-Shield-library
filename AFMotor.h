@@ -91,7 +91,9 @@
     // since there's only one timebase for all 4 PWM outputs
     #define STEPPER1_PWM_RATE   MOTOR12_39KHZ
     #define STEPPER2_PWM_RATE   MOTOR34_39KHZ
-    
+
+#else
+    #define _BV(bit) (1 << (bit)
 #endif
 
 // Bit positions in the 74HCT595 shift register output
